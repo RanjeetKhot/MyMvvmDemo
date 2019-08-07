@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="quote"
+                  type="com.example.kotlinpeople.other.QuotesResponse"/>
+    </data>
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:id="@+id/quote"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{`'`+quote.title+`'`}"
+                    tools:text="Success doesn’t just find you. You have to go out and get it."/>
+
+            <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@{`-` + quote.body}"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/quote"
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textStyle="italic"/>
+
+            <TextView
+                    android:layout_marginTop="7dp"
+                    android:layout_below="@id/author"
+                    android:background="@color/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
