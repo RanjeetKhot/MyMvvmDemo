@@ -6,7 +6,7 @@
 
         <variable
                 name="viewmodel"
-                type="com.example.kotlinpeople.UI.Fragment.LoginFragment.LoginViewModel"
+                type="com.example.kotlinpeople.ui.fragment.loginFragment.LoginViewModel"
         />
 
     </data>
@@ -70,22 +70,23 @@
                         android:layout_height="wrap_content"/>
 
                 <Button
-
                         android:layout_gravity="center_horizontal"
                         android:textAllCaps="false"
                         android:text="Sign In"
+                        android:onClick="@{viewmodel::onLoginButtonClick}"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"/>
 
 
             </LinearLayout>
 
-            <TextView
+            <Button
                     android:layout_marginTop="12dp"
                     android:layout_centerHorizontal="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:layout_below="@id/linearLayout2"
                     android:textAlignment="center"
+                    android:onClick="@{viewmodel::onSignupButtonClick}"
                     android:text="Don't have an account?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

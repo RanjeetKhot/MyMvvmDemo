@@ -1,7 +1,9 @@
-package com.example.kotlinpeople.UI.Fragment.LoginFragment
+package com.example.kotlinpeople.ui.fragment.loginFragment
+
+import com.example.kotlinpeople.DB.User
 
 interface LoginListener {
     fun onStarted()
-    fun onSuccess(message: String)
+    fun onSuccess(user: User)
     fun onFailure(message: String)
 }

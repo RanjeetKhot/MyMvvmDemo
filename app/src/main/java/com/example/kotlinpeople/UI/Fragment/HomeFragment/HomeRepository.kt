@@ -1,4 +1,4 @@
-package com.example.kotlinpeople.UI.Fragment.HomeFragment
+package com.example.kotlinpeople.ui.fragment.HomeFragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.kotlinpeople.API.MyApi

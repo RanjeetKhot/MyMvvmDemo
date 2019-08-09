@@ -1,10 +1,10 @@
-package com.example.kotlinpeople.UI.Activity
+package com.example.kotlinpeople.ui.Activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlinpeople.R
-import com.example.kotlinpeople.UI.Fragment.HomeFragment.HomeFragment
-import com.example.kotlinpeople.UI.Fragment.LoginFragment.LoginFragment
+import com.example.kotlinpeople.ui.fragment.HomeFragment.HomeFragment
+import com.example.kotlinpeople.ui.fragment.loginFragment.LoginFragment
 
 class MainActivity : AppCompatActivity() {
     var homeFragment = HomeFragment()

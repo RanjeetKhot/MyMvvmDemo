@@ -1,43 +1,30 @@
-package com.example.kotlinpeople.UI.Fragment.LoginFragment
+package com.example.kotlinpeople.ui.fragment.loginFragment
 
 import com.example.kotlinpeople.API.MyApi
 import com.example.kotlinpeople.DB.AppDatabase
-import com.example.kotlinpeople.other.RegistrationResponse
-import com.example.kotlinpeople.util.PreferenceProvider
+import com.example.kotlinpeople.DB.User
 import com.example.kotlinpeople.util.SafeApiRequest
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 
 class LoginRepository(
     private val api: MyApi,
-    private val db: AppDatabase,
-    private val pref: PreferenceProvider): SafeApiRequest()  {
+    private val db: AppDatabase
+) : SafeApiRequest() {
 
-    fun checkIsLogin(email: String, password: String) {
-        if (pref.getLastSavedAt().isNullOrBlank()) {
-            //val response=api.getLogin()
-        }
-
+    suspend fun userLogin(email: String, password: String): AuthResponse {
+        return apiRequest { api.userLogin(email, password) }
     }
 
-    suspend fun saveLogin(email: String, password: String) {
-        GlobalScope.async {
-            if (pref.getLastSavedAt().isNullOrBlank()) {
-                val response = api.getLogin()
-            }
-        }
 
-
-
-        CoroutineScope(Dispatchers.IO).let {
-
-            db.getRegistartionDao().saveRegistration(RegistrationResponse(1, email, password))
-        }
-
-
+    suspend fun userSignup(
+        name: String,
+        email: String,
+        password: String
+    ) : AuthResponse {
+        return apiRequest{ api.userSignup(name, email, password)}
     }
 
+    suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
+
+    fun getUser() = db.getUserDao().getuser()
 
 }

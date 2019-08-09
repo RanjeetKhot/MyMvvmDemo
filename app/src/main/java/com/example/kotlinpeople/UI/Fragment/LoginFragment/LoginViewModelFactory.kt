@@ -1,4 +1,4 @@
-package com.example.kotlinpeople.UI.Fragment.LoginFragment
+package com.example.kotlinpeople.ui.fragment.loginFragment
 
 
 import androidx.lifecycle.ViewModel

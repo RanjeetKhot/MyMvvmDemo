@@ -1,4 +1,4 @@
-package com.example.kotlinpeople.UI.Fragment.HomeFragment
+package com.example.kotlinpeople.ui.fragment.HomeFragment
 
 import Coroutines
 import android.os.Bundle

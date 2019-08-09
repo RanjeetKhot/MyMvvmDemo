@@ -5,16 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.kotlinpeople.other.QuotesResponse
-import com.example.kotlinpeople.other.RegistrationResponse
 
 @Database(
-    entities = [QuotesResponse::class,RegistrationResponse::class],
-    version = 2
+    entities = [QuotesResponse::class,User::class],
+    version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getQuoteDao(): QuoteDao
-    abstract fun getRegistartionDao(): RegistrationDao
+    abstract fun getUserDao(): UserDao
 
     companion object {
 

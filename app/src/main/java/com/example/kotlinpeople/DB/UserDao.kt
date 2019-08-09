@@ -5,16 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.kotlinpeople.other.RegistrationResponse
 
 @Dao
-interface RegistrationDao {
+interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveRegistration(user :RegistrationResponse)
+    suspend fun upsert(user: User): Long
 
-
-      @Query("SELECT * FROM RegistrationResponse")
-      fun getRegistration(): LiveData<RegistrationResponse>
+    @Query("SELECT * FROM user WHERE uid = $CURRENT_USER_ID")
+    fun getuser(): LiveData<User>
 
 }

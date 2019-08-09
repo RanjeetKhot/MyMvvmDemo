@@ -1,28 +1,44 @@
 package com.example.kotlinpeople.API
+
 import com.example.kotlinpeople.other.QuotesResponse
-import com.example.kotlinpeople.other.RegistrationResponse
+import com.example.kotlinpeople.ui.fragment.loginFragment.AuthResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface MyApi {
 
     @GET("posts")
-    suspend fun getQuotes() : Response<List<QuotesResponse>>
+    suspend fun getQuotes(): Response<List<QuotesResponse>>
 
-    @GET("login")
-    suspend fun getLogin() : Response<List<RegistrationResponse>>
+    @FormUrlEncoded
+    @POST("login")
+    suspend fun userLogin(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Response<AuthResponse>
 
 
-    companion object{
+    @FormUrlEncoded
+    @POST("signup")
+    suspend fun userSignup(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Response<AuthResponse>
+
+    companion object {
         operator fun invoke(
             networkConnectionInterceptor: NetworkConnectionInterceptor
-        ) : MyApi{
+        ): MyApi {
 
-            val incept=HttpLoggingInterceptor()
+            val incept = HttpLoggingInterceptor()
             incept.setLevel(HttpLoggingInterceptor.Level.HEADERS)
             incept.setLevel(HttpLoggingInterceptor.Level.BODY)
 

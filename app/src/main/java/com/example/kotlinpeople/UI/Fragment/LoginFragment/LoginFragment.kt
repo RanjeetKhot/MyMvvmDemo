@@ -1,59 +1,69 @@
-package com.example.kotlinpeople.UI.Fragment.LoginFragment
+package com.example.kotlinpeople.ui.fragment.loginFragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.kotlinpeople.DB.User
 import com.example.kotlinpeople.R
 import com.example.kotlinpeople.databinding.FragmentLoginBinding
+import com.example.kotlinpeople.ui.Activity.DrawerActivity
+import hide
+import kotlinx.android.synthetic.main.fragment_login.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import show
+import snackbar
 
-class LoginFragment : Fragment(), KodeinAware, LoginListener {
+class LoginFragment : Fragment(), KodeinAware,LoginListener
+{
+
 
 
     override val kodein by kodein()
-    lateinit var mViewModel: LoginViewModel
-    val factory: LoginViewModelFactory by instance()
 
+    private lateinit var viewModel: LoginViewModel
+    private val factory: LoginViewModelFactory by instance()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-      /*  mViewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
-
-        val binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-                as FragmentLoginBinding
-      *//*  val bind = DataBindingUtil
-            .setContentView<FragmentLoginBinding>(activity!!, R.layout.fragment_login)*//*
-        binding.viewmodel = mViewModel
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding: FragmentLoginBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+        viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
+        binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-        return binding.root*/
+        viewModel.setListener(this)
 
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        viewModel.getLoggedInUser().observe(this, Observer { user ->
+            if(user != null){
+
+            }
+        })
 
 
-        return view
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
-
-    }
     override fun onStarted() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progress_bar.show()
     }
 
-    override fun onSuccess(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onSuccess(user: User) {
+        progress_bar.hide()
     }
 
     override fun onFailure(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progress_bar.hide()
+        root_layout.snackbar(message)
     }
-
 }
